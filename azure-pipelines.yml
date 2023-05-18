@@ -31,7 +31,7 @@ steps:
     inputs:
       commands: publish
       publishWebProjects: true
-      arguments: '--configuration $(buildConfiguration) --output $(build.artifactStagingDirectory)'
+      arguments: '--configuration $(buildConfiguration) --property:PublishDir=$(build.artifactStagingDirectory)'
       modifyOutputPath: false
       zipAfterPublish: true
 
