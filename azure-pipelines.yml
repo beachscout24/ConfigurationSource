@@ -5,25 +5,25 @@ variables:
     buildConfiguration: 'Release'
     
 pool: 
-    vmImage: 'ubuntu-latest'
+    vmImage: 'windows-latest'
     
 steps:
-    - task: UseDotNet@2
-      inputs:
-        packageType: sdk
-        version: '5.x'
+  - task: UseDotNet@2
+     inputs:
+       packageType: sdk
+       version: '5.x'
 
-- task: DotNetCoreCLI@2
-    displayName: 'Build Application'
+  - task: DotNetCoreCLI@2
+    displayName: 'Package Configuration Application'
     inputs:
-        commands: 'publish'
-        publishWebProjects: true
-        arguments: '--configuration $(buildConfiguration) --output $(Build.BinariesDirectory)/$(Build.BuildId)'
-        modifyOutputPath: false
+       commands: 'publish'
+       publishWebProjects: true
+       arguments: '--configuration $(buildConfiguration) --output $(Build.BinariesDirectory)/$(Build.BuildId)'
+       modifyOutputPath: false
 
-- task: PublishBuildArtifact@1
-    displayName: 'Publish Web Artifact'
+  - task: PublishBuildArtifact@1
+    displayName: 'Publish Configuration Artifact'
     inputs:
-        pathToPublish: '$(Build.BinariesDirectory)/$(Build.BuildId)'
-        ArtifactName: 'drop-$(Build.BuildId)'
-        publishLocation: 'Container'
+       pathToPublish: '$(Build.BinariesDirectory)/$(Build.BuildId)'
+       ArtifactName: 'drop-$(Build.BuildId)'
+       publishLocation: 'Container'
