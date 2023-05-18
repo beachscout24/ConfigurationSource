@@ -21,7 +21,7 @@ steps:
       arguments: '--configuration $(buildConfiguration) --output $(Build.BinariesDirectory)/$(Build.BuildId)'
       modifyOutputPath: false
 
-  - task: PublishBuildArtifact@1
+  - task: PublishBuildArtifacts@1
     displayName: 'Publish Configuration Artifact'
     inputs:
       pathToPublish: '$(Build.BinariesDirectory)/$(Build.BuildId)'
