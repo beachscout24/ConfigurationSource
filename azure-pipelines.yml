@@ -14,16 +14,13 @@ steps:
       version: '6.x'
 
   - task: DotNetCoreCLI@2
-    displayName: 'Package Configuration Application'
+    displayName: 'Configuration Source Project Package Application'
     inputs:
-      commands: 'publish'
+      commands: publish
       publishWebProjects: true
-      arguments: '--configuration $(buildConfiguration) --output $(Build.BinariesDirectory)/$(Build.BuildId)'
+      arguments: '--configuration $(buildConfiguration) --output $(build.artifactStagingDirectory)'
       modifyOutputPath: false
+      zipAfterPublish: : true
 
   - task: PublishBuildArtifacts@1
-    displayName: 'Publish Configuration Artifact'
-    inputs:
-      pathToPublish: '$(Build.BinariesDirectory)/$(Build.BuildId)'
-      ArtifactName: 'drop-$(Build.BuildId)'
-      publishLocation: 'Container'
+    displayName: 'Configuration Source Project Publish Artifact'
